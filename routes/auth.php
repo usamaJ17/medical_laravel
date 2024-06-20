@@ -11,10 +11,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest')
                 ->name('register');
+Route::get('/register', [RegisteredUserController::class, 'registerForm'])
+                ->middleware('guest')
+                ->name('register.form');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
                 ->middleware('guest')
                 ->name('login');
+Route::get('/login', [AuthenticatedSessionController::class, 'loginForm'])
+                ->middleware('guest')
+                ->name('login.form');
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
                 ->middleware('guest')
@@ -32,6 +38,6 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
                 ->middleware(['auth', 'throttle:6,1'])
                 ->name('verification.send');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::any('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');

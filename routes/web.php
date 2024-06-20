@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard')->middleware('auth');
